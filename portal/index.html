@@ -1,0 +1,290 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Portal template</title>
+        
+        <meta charset="utf-8">
+			<!--CSS-->
+                <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+                <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+                <link rel="stylesheet" href="static/assets/fontawesome-free-5.12.0-web/css/all.css"> <!--load all styles -->
+                <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+                <link rel="stylesheet" href="static/main.css" />
+			<!--JS-->
+                <!--jQuery-->
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                <!--Bootstrap-->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+                <!--leaflet-->
+                <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" crossorigin=""></script>
+                <!--Esri Leaflet-->
+                <script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js" crossorigin=""></script>
+                <script src="https://unpkg.com/esri-leaflet-vector@4.0.0/dist/esri-leaflet-vector.js"></script>
+                <!--leaflet geocoder plugin-->
+                <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+                <!--custom-->
+                <script src = "static/js/toggleDatasets.js"></script>
+                <script src = "static/js/loadData.js"></script>
+                <script src = "static/js/descInfo.js"></script>
+
+			<!--required to fix scaling on mobile-->
+			<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	</head>
+    <body>
+		<div id = "banner" class = "banner">
+			<h1>Example Mapping Portal</h1>
+			<img class = "ncs_logo" src = "static/assets/ncs_logo_horizontal.png">
+		</div>
+
+        <div id = "side-container" class = "side-container">
+			<!--sidebar-->
+			<div id = "sidebar" class = "sidebar">
+				<button id = "hideSidebar" type="button" class="btn btn-dark" title = 'Hide the sidebar'>
+					<i class="fas fa-times"></i>
+				</button>
+                <h2>Select datasets</h2>
+                <!--ECOSYSTEM SERVICES-->
+				<div id = 'ecosystem-services' class = 'dataset-group'>
+                    <h3>Ecosystem services
+                        <button id = "toggleEsDatasets" type="button" class="btn btn-outline-light" onclick = 'toggleEsDatasets(this.id)'>
+                            <i class="fas fa-angle-down"></i>
+                        </button>
+                    </h3>
+                    <div id = "ecosystem-datasets" class = "datasets">
+
+                        <!--Accessible nature capacity-->
+                        <div id = 'dataset-contents' class = 'dataset-contents'>
+                            <div id = 'dataset-headings' class = 'dataset-headings'> 
+                                <h3>Accessible nature capacity</h3> 
+                                <input type = 'checkbox' id = 'data-checkbox1' class = 'data-checkbox' name = data1 value = accessible_nature_capacity onclick='esDataClick()'>
+                                    <label for='data-checkbox1' class='fas fa-plus-square' title = 'Toggle dataset'></label>
+                            </div>
+                            <div id = 'dataset-tools' class = 'dataset-tools'>
+                                <div id = 'desc-info1' class = 'desc-info' onclick = 'descInfo("1")'><i class='fas fa-info-circle' title = 'Show dataset description'></i> </div>
+                                <div id = 'legend1' class = 'dataset-legend'>
+                                    <div id = 'legend-text1' class = 'dataset-legend-text'>0</div>
+                                    <div id = 'legend-palette' class = 'dataset-legend-palette'></div>
+                                    <div id = 'legend-text1' class = 'dataset-legend-text'>100</div>
+                                </div>
+                                <input type='range' id = slider1 class = 'transparency-slider' min='0' max='1' value='1' step = '0.01' oninput = 'sliderInput(1)' title = 'Set transparency level'>
+                            </div>
+                            <div id = 'dataset-desc1' class = 'dataset-desc'>
+                                <p1>
+                                    The importance of access to greenspace is increasingly recognised due to the multiple benefits that it can provide to people. In particular, there is strong evidence linking access to greenspace to a variety of health and wellbeing measures. Research has also shown that there is a link between wellbeing and perceptions of biodiversity and naturalness. Natural England and others have published guidelines that promote the enhancement of access, naturalness and connectivity of greenspaces.  The two key components of accessible nature capacity are, therefore, public access and perceived naturalness. Both of these components are captured in the model, which maps the availability of natural areas and scores them by their perceived level of “naturalness”.
+                                </p1>
+                            </div>
+                        </div>
+
+                        <!--Air purification capacity-->
+                        <div id = 'dataset-contents' class = 'dataset-contents'>
+                            <div id = 'dataset-headings' class = 'dataset-headings'> 
+                                <h3>Air purification capacity</h3> 
+                                <input type = 'checkbox' id = 'data-checkbox2' class = 'data-checkbox' name = data2 value = air_purification_capacity onclick='esDataClick()'>
+                                    <label for='data-checkbox2' class='fas fa-plus-square' title = 'Toggle dataset'></label>
+                            </div>
+                            <div id = 'dataset-tools' class = 'dataset-tools'>
+                                <div id = 'desc-info2' class = 'desc-info' onclick = 'descInfo("2")'><i class='fas fa-info-circle' title = 'Show dataset description'></i> </div>
+                                <div id = 'legend2' class = 'dataset-legend'>
+                                    <div id = 'legend-text2' class = 'dataset-legend-text'>0</div>
+                                    <div id = 'legend-palette' class = 'dataset-legend-palette'></div>
+                                    <div id = 'legend-text2' class = 'dataset-legend-text'>100</div>
+                                </div>
+                                <input type='range' id = slider2 class = 'transparency-slider' min='0' max='1' value='1' step = '0.01' oninput = 'sliderInput(2)' title = 'Set transparency level'>
+                            </div>
+                            <div id = 'dataset-desc2' class = 'dataset-desc'>
+                                <p1>
+                                    According to Public Health England, air pollution is the biggest environmental threat to health in the UK, with between 28,000 and 36,000 deaths a year attributed to long-term exposure, with the greatest threats from particulate matter (PM 2.5) and nitrous oxides (NOx). Air purification capacity estimates the relative ability of vegetation to trap airborne pollutants or ameliorate air pollution. Vegetation can be effective at mitigating the effects of air pollution, primarily by intercepting airborne particulates but also by absorbing ozone. Trees provide more effective mitigation than grass or low-lying vegetation, although this varies depending on the species of plant. Coniferous trees are generally more effective than broadleaved trees due to the higher surface area of needles and because the needles are not shed during the winter.
+                                </p1>
+                            </div>
+                        </div>
+
+                        <!--Noise regulation capacity-->
+                        <div id = 'dataset-contents' class = 'dataset-contents'>
+                            <div id = 'dataset-headings' class = 'dataset-headings'> 
+                                <h3>Noise regulation capacity</h3> 
+                                <input type = 'checkbox' id = 'data-checkbox3' class = 'data-checkbox' name = data3 value = noise_regulation_capacity onclick='esDataClick()'>
+                                    <label for='data-checkbox3' class='fas fa-plus-square' title = 'Toggle dataset'></label>
+                            </div>
+                            <div id = 'dataset-tools' class = 'dataset-tools'>
+                                <div id = 'desc-info3' class = 'desc-info' onclick = 'descInfo("3")'><i class='fas fa-info-circle' title = 'Show dataset description'></i> </div>
+                                <div id = 'legend3' class = 'dataset-legend'>
+                                    <div id = 'legend-text3' class = 'dataset-legend-text'>0</div>
+                                    <div id = 'legend-palette' class = 'dataset-legend-palette'></div>
+                                    <div id = 'legend-text3' class = 'dataset-legend-text'>100</div>
+                                </div>
+                                <input type='range' id = slider3 class = 'transparency-slider' min='0' max='1' value='1' step = '0.01' oninput = 'sliderInput(3)' title = 'Set transparency level'>
+                            </div>
+                            <div id = 'dataset-desc3' class = 'dataset-desc'>
+                                <p1>
+                                    Noise regulation capacity is the capacity of the land to diffuse and absorb noise pollution. Noise can impact health, wellbeing, productivity and the natural environment. Consequently, the World Health Organisation (WHO) has identified environmental noise as the second-largest environmental health risk in Western Europe (after air pollution). It is estimated that the annual social cost of urban road noise in England is £7 to £10 billion (Defra 2013). Major roads, railways, airports and industrial areas can be sources of considerable noise, but the use of vegetation can screen and reduce the effects on surrounding neighbourhoods. Complex vegetation cover, such as woodland, trees and scrub, is considered to be most effective. However, any vegetation cover is more effective than artificial sealed surfaces, and the effectiveness of vegetation increases with width.
+                                </p1>
+                            </div>
+                        </div>
+
+                        <!--Noise regulation demand-->
+                        <div id = 'dataset-contents' class = 'dataset-contents'>
+                            <div id = 'dataset-headings' class = 'dataset-headings'> 
+                                <h3>Noise regulation demand</h3> 
+                                <input type = 'checkbox' id = 'data-checkbox4' class = 'data-checkbox' name = data4 value = noise_regulation_demand onclick='esDataClick()'>
+                                    <label for='data-checkbox4' class='fas fa-plus-square' title = 'Toggle dataset'></label>
+                            </div>
+                            <div id = 'dataset-tools' class = 'dataset-tools'>
+                                <div id = 'desc-info4' class = 'desc-info' onclick = 'descInfo("4")'><i class='fas fa-info-circle' title = 'Show dataset description'></i> </div>
+                                <div id = 'legend4' class = 'dataset-legend'>
+                                    <div id = 'legend-text4' class = 'dataset-legend-text'>0</div>
+                                    <div id = 'legend-palette' class = 'dataset-legend-palette'></div>
+                                    <div id = 'legend-text4' class = 'dataset-legend-text'>100</div>
+                                </div>
+                                <input type='range' id = slider4 class = 'transparency-slider' min='0' max='1' value='1' step = '0.01' oninput = 'sliderInput(4)' title = 'Set transparency level'>
+                            </div>
+                            <div id = 'dataset-desc4' class = 'dataset-desc'>
+                                <p1>
+                                    Noise regulation demand estimates societal and environmental need for ecosystems that can absorb and reflect anthropogenic noise. 
+                                </p1>
+                            </div>
+                        </div>
+
+                        <!--Water flow regulation capacity-->
+                        <div id = 'dataset-contents' class = 'dataset-contents'>
+                            <div id = 'dataset-headings' class = 'dataset-headings'> 
+                                <h3>Water flow regulation capacity</h3> 
+                                <input type = 'checkbox' id = 'data-checkbox5' class = 'data-checkbox' name = data5 value = water_flow_capacity onclick='esDataClick()'>
+                                    <label for='data-checkbox5' class='fas fa-plus-square' title = 'Toggle dataset'></label>
+                            </div>
+                            <div id = 'dataset-tools' class = 'dataset-tools'>
+                                <div id = 'desc-info5' class = 'desc-info' onclick = 'descInfo("5")'><i class='fas fa-info-circle' title = 'Show dataset description'></i> </div>
+                                <div id = 'legend5' class = 'dataset-legend'>
+                                    <div id = 'legend-text5' class = 'dataset-legend-text'>0</div>
+                                    <div id = 'legend-palette' class = 'dataset-legend-palette'></div>
+                                    <div id = 'legend-text5' class = 'dataset-legend-text'>100</div>
+                                </div>
+                                <input type='range' id = slider5 class = 'transparency-slider' min='0' max='1' value='1' step = '0.01' oninput = 'sliderInput(5)' title = 'Set transparency level'>
+                            </div>
+                            <div id = 'dataset-desc5' class = 'dataset-desc'>
+                                <p1>
+                                    Water flow capacity is the capacity of the land to slow water runoff and thereby potentially reduce flood risk downstream. Following a number of recent flooding events in the UK and the expectation that these will become more frequent over the coming years due to climate change, there is growing interest in working with natural processes to reduce downstream flood risk. These projects aim to “slow the flow” and retain water in the upper catchments for as long as possible. Maps of water flow capacity can be used to assess relative risk and help identify areas where land use can be changed. 
+                                </p1>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <!--OPPORTUNITIES-->
+				<div id = 'opportunities' class = 'dataset-group'>
+                    <h3>Opportunities
+                        <button id = "toggleOppDatasets" type="button" class="btn btn-outline-light" onclick = 'toggleOppDatasets(this.id)'>
+                            <i class="fas fa-angle-down"></i>
+                        </button>
+                    </h3>
+                    <div id = "opportunity-datasets" class = "datasets">
+                        <!-- air quality example-->
+                        <div id = 'dataset-contents' class = 'dataset-contents'>
+                            <div id = 'dataset-headings' class = 'dataset-headings'> 
+                                <h3>Air quality</h3> 
+                                <input type = 'checkbox' id = 'data-checkbox6' class = 'data-checkbox' name = data6 value = air_quality_opportunities onclick='oppDataClick()'>
+                                    <label for='data-checkbox6' class='fas fa-plus-square' title = 'Toggle dataset'></label>
+                            </div>
+                            <div id = 'dataset-tools' class = 'dataset-tools'>
+                                <div id = 'desc-info6' class = 'desc-info' onclick = 'descInfo("6")'><i class='fas fa-info-circle' title = 'Show dataset description'></i> </div>
+                                <div id = 'legend6' class = 'dataset-legend-opp'>
+                                    <div id = 'legend-text6' class = 'dataset-legend-text-opp' style = "background-color: #446589; color: white">10% tile - highest</div>
+                                    <div id = 'legend-text6' class = 'dataset-legend-text-opp' style = "background-color: #66CDAB;">25% tile - high</div>
+                                    <div id = 'legend-text6' class = 'dataset-legend-text-opp' style = "background-color: #E9FFBE;">50% tile - medium</div>
+                                </div>
+                                <input type='range' id = slider6 class = 'transparency-slider' min='0' max='1' value='1' step = '0.01' oninput = 'sliderInput(6)' title = 'Set transparency level'>
+                            </div>
+                            <div id = 'dataset-desc6' class = 'dataset-desc'>
+                                <p1>
+                                    Air pollution is often highly localised, and vegetation is most effective at mitigating pollutants when planted close to pollution sources. Opportunities to ameliorate air pollution were therefore focussed around areas with greatest demand. Demand is assumed to be highest in areas where there are likely to be high air pollution levels and where there are lots of people who could benefit from the air quality regulation service. The opportunity maps therefore highlight areas that currently have no trees, but where it would be most beneficial to plant them.
+                                </p1>
+                            </div>
+                        </div>
+                        
+                         <!-- noise regulation example-->
+                         <div id = 'dataset-contents' class = 'dataset-contents'>
+                            <div id = 'dataset-headings' class = 'dataset-headings'> 
+                                <h3>Noise regulation</h3> 
+                                <input type = 'checkbox' id = 'data-checkbox7' class = 'data-checkbox' name = data7 value = noise_regulation_opportunities onclick='oppDataClick()'>
+                                    <label for='data-checkbox7' class='fas fa-plus-square' title = 'Toggle dataset'></label>
+                            </div>
+                            <div id = 'dataset-tools' class = 'dataset-tools'>
+                                <div id = 'desc-info7' class = 'desc-info' onclick = 'descInfo("7")'><i class='fas fa-info-circle' title = 'Show dataset description'></i> </div>
+                                <div id = 'legend7' class = 'dataset-legend-opp'>
+                                    <div id = 'legend-text7' class = 'dataset-legend-text-opp' style = "background-color: #446589; color: white">10% tile - highest</div>
+                                    <div id = 'legend-text7' class = 'dataset-legend-text-opp' style = "background-color: #66CDAB;">25% tile - high</div>
+                                    <div id = 'legend-text7' class = 'dataset-legend-text-opp' style = "background-color: #E9FFBE;">50% tile - medium</div>
+                                </div>
+                                <input type='range' id = slider7 class = 'transparency-slider' min='0' max='1' value='1' step = '0.01' oninput = 'sliderInput(7)' title = 'Set transparency level'>
+                            </div>
+                            <div id = 'dataset-desc7' class = 'dataset-desc'>
+                                <p1> 
+                                    Opportunities to reduce noise pollution were mapped in a very similar way to the air quality regulation opportunity mapping just described. This was focussed around areas with greatest demand for noise regulation. Dense plantings of trees and scrub are the habitat type that could potentially reduce noise pollution; the opportunity maps therefore highlight areas that currently have no trees, but where it would be most beneficial to plant them.  
+                                </p1>
+                            </div>
+                        </div>
+
+                        <!-- water flow regulation example-->
+                        <div id = 'dataset-contents' class = 'dataset-contents'>
+                            <div id = 'dataset-headings' class = 'dataset-headings'> 
+                                <h3>Water flow regulation</h3> 
+                                <input type = 'checkbox' id = 'data-checkbox8' class = 'data-checkbox' name = data8 value = water_flow_opportunities onclick='oppDataClick()'>
+                                    <label for='data-checkbox8' class='fas fa-plus-square' title = 'Toggle dataset'></label>
+                            </div>
+                            <div id = 'dataset-tools' class = 'dataset-tools'>
+                                <div id = 'desc-info8' class = 'desc-info' onclick = 'descInfo("8")'><i class='fas fa-info-circle' title = 'Show dataset description'></i> </div>
+                                <div id = 'legend8' class = 'dataset-legend-opp'>
+                                    <div id = 'legend-text8' class = 'dataset-legend-text-opp' style = "background-color: #446589; color: white">10% tile - highest</div>
+                                    <div id = 'legend-text8' class = 'dataset-legend-text-opp' style = "background-color: #66CDAB;">25% tile - high</div>
+                                    <div id = 'legend-text8' class = 'dataset-legend-text-opp' style = "background-color: #E9FFBE;">50% tile - medium</div>
+                                </div>
+                                <input type='range' id = slider8 class = 'transparency-slider' min='0' max='1' value='1' step = '0.01' oninput = 'sliderInput(8)' title = 'Set transparency level'>
+                            </div>
+                            <div id = 'dataset-desc8' class = 'dataset-desc'>
+                                <p1> 
+                                    There is a growing interest in working with natural processes to reduce downstream flood risk. These projects aim to “slow the flow”, reduce surface water runoff and retain water away from the main river channels for as long as possible. Planting woodland is an effective way to achieve this aim, although measures could also include woody debris dams and attenuation ponds in upstream areas. Opportunity mapping to reduce surface runoff highlights areas across the whole catchment where changing land-use would have the greatest impact on reducing runoff. 
+                                </p1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+			</div>
+
+            <!--div for tools that sits along the side of the sidebar-->
+            <div id = "tools-side" class = "tools-side">
+                <!-- showSidebar -->
+                <script src = "static/js/showSidebar.js"></script>
+                <button id = "showSidebar" type="button" class="btn btn-light" title="Show the data sidebar">
+                    <i class="fas fa-layer-group"></i>
+                </button>
+                <!--zoom to fullBounds-->
+                <button id = "fullBounds" type="button" class="btn btn-light" onClick = "fullBounds.js" title="Zoom to full extent">
+                    <i class="fas fa-expand-arrows-alt"></i>
+                </button>
+                <!--geolocate-->
+                <button id = "geolocate" type="button" class="btn btn-light" onClick = "geolocate.js" title="Zoom to your location">
+                    <i class="fas fa-location-arrow"></i>
+                </button>
+                <!--print-->
+                <script src = "static/js/printMap.js"></script>
+                <button id = "printMap" type="button" class="btn btn-light" onClick = "printMap.js" title="Print map">
+                    <i class="fas fa-print"></i>
+                </button>
+            </div>
+        </div>
+
+        <!--MAP-->
+        <div id = "map" class = "map">
+            <script src = "static/js/leaflet-extensions/leaflet.browser.print/leaflet.browser.print.min.js"></script>
+            <script src = "static/js/map.js"></script>
+            <script src = "static/js/checkBaseMap.js"></script>
+            <script src = "static/js/fullBounds.js"></script>
+            <script src = "static/js/geolocate.js"></script>
+            <script src = "static/js/sliderInput.js"></script>
+            <script src = "static/js/basemapLegend.js"></script>
+        </div>
+    </body>
+</html>

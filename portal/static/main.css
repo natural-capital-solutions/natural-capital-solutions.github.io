@@ -1,0 +1,423 @@
+body {
+    margin: auto;
+    color: rgb(52, 58, 64);
+    min-width: 45em;
+}
+
+body > div {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+h1 {
+    padding-left: 1%;
+    font-weight: bold;
+    font-size: 150%;
+}
+
+h2 {
+    padding-top: 5%;
+    padding-left: 3%;
+    font-weight: bold;
+}
+
+/*dataset-contents*/
+h3 {
+    font-size: 120%;
+    padding: 1%;
+    font-weight: bold;
+    transition: all 500ms linear; /*slow down the (un) hover animation - appear smoother */
+}
+
+p1 {
+    font-size: 70%;
+    padding: 1%;
+    font-style: italic;
+}
+
+
+/*-------------------BANNER----------------------------*/
+.banner {
+    height: 3em;
+    position: relative;
+    z-index: 1;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ncs_logo {
+    right: 0.5%;
+    width: 15%;
+    position: absolute;
+}
+
+.side-container {
+    background-color: rgba(104, 127, 151, 0);
+    max-width: 40%;
+    z-index: 998;
+    position: absolute;
+    display: flex;
+
+}
+
+/*-------------------SIDEBAR----------------------------*/
+
+#hideSidebar {
+    margin-top: 6%;
+    margin-right: 2.5%;
+    float: right;
+    z-index: 1000;
+}
+
+.sidebar {
+    float: left;
+    margin: 1em;
+    min-width: 23em;
+    max-height: 85vh;
+    z-index: 1000;
+    background-color: white;
+    border-radius: 15px;
+    overflow: scroll;
+    overflow-x: hidden;
+    box-shadow: -2.5px 0 #c1c3b1, 0 2.5px #c1c3b1, 2.5px 0 #c1c3b1, 0 -2.5px #c1c3b1;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.sidebar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+} 
+
+.datasets {
+    display: block;
+}
+
+.dataset-group {
+    background-color: rgba(80, 150, 150, 0.8);
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+    border-radius: 10px;
+}
+
+.dataset-group > h3 {
+    font-size: 1.45rem;
+    color: white;
+    padding-top: 0.5em;
+    display: flex;
+    justify-content: space-around;
+}
+
+.dataset-contents {
+    display: flex; 
+    flex-direction: column;
+    background-color: rgba(227, 227, 227, 0.9);
+    border-radius: 10px;
+    margin: 0.5em; /*center div*/
+    margin-bottom: 5%; /*create space between subsequent divs */
+    padding: 2%;
+    transition: all 500ms linear; /*slow down the (un) hover animation - appear smoother */
+}
+
+.dataset-contents:hover {
+    background-color: rgba(211, 210, 210, 0.9);
+    transition: all 500ms linear; /*slow down the hover animation - appear smoother */
+
+}
+
+.dataset-headings {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.dataset-headings > label {
+    margin-top: 0.5em;
+    margin-right: 0.5em;
+    font-size: 150%;
+    
+}
+
+.data-checkbox {
+    float: right;
+    display: none;
+}
+
+
+.data-checkbox:not(:checked) + label:before {
+    content: "\f204"; 
+}
+
+.data-checkbox:checked + label:before {
+    content: "\f205";
+    color: rgba(80, 150, 150, 0.8);
+}
+
+.dataset-legend {
+    display: none;
+    flex-direction: row;
+    margin: auto;
+}
+
+.dataset-legend-opp {
+    display: none;
+    flex-direction: column;
+    margin: auto;
+}
+
+.dataset-legend-palette {
+    width: 5em;
+    background-image: linear-gradient(to right,#0a6265, #e7e2bd, #db4324);
+    border-radius: 5px;
+    margin-top: 0.55em;
+    margin-bottom: 0.55em;
+}
+
+
+.dataset-legend-text {
+    font-size: 0.6rem;
+    font-style: italic;
+    font-weight: bold;
+    padding: 0.5em;
+}
+
+.dataset-legend-text-opp {
+    font-size: 0.6rem;
+    font-style: italic;
+    font-weight: bold;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    margin: 0.2em
+}
+
+.dataset-tools {
+    display: flex;
+    justify-content: space-between;
+}
+
+.desc-info {
+    display: block;
+}
+
+.transparency-slider {
+    width: 5em;
+    display: none;
+}
+
+.dataset-desc {
+    display: none;
+    background-color: rgb(52, 58, 64);
+    color: white;
+    border-radius: 5px;
+    padding: 0.5em;
+    margin-top: 0.3em;
+}
+/*---------------tools side and tool buttons-------------*/
+.tools-side {
+    display: flex;
+    flex-direction: column;
+    margin: 0.8em;
+    background-color:rgba(32, 218, 125, 0);
+}
+
+.tools-side > .btn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    color: rgb(52, 58, 64);
+    box-shadow: -2.5px 0 #c1c3b1, 0 2.5px #c1c3b1, 2.5px 0 #c1c3b1, 0 -2.5px #c1c3b1;
+    margin: 0.3em;
+    width: 50px; /*px used to match leaflet zoom control */
+    height: 50px; /*px used to match leaflet zoom control */
+    border-radius: 5px;
+    font-size: 120%;
+}
+
+#showSidebar {
+    display: none;
+}
+
+/* ------geocoder plugin-------*/
+.leaflet-control-geocoder {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    color: rgb(52, 58, 64);
+    box-shadow: -2.5px 0 #c1c3b1, 0 2.5px #c1c3b1, 2.5px 0 #c1c3b1, 0 -2.5px #c1c3b1;
+    margin: 0.3em;
+    width: 50px; /*px used to match leaflet zoom control */
+    height: 50px; /*px used to match leaflet zoom control */
+    border-radius: 5px;
+    font-size: 120%;
+}
+
+.leaflet-control-geocoder-icon:hover {
+    background-color: #E9E9ED;
+    transition: all 100ms linear; /*slow down the hover animation - appear smoother */
+}
+
+ .leaflet-control-geocoder-icon {
+    width: 100%; /* icon is based on background image */
+    height: 100%;
+}  
+
+.leaflet-control-geocoder-form {
+    font-size: 0.7rem;
+    background-color: white;
+    border-radius: 5px;
+    width: 15em;
+}
+
+.leaflet-control-geocoder-alternatives {
+    font-size: 0.6rem;
+    background-color: white;
+    border-radius: 5px;
+    width: 17.5em;
+}
+
+.leaflet-control-geocoder-alternatives > li > a {
+    box-shadow: none;
+}
+
+.leaflet-control-geocoder-alternatives > li > a:hover{
+    box-shadow: none;
+}
+
+/*----------customise leaflet zoom control----------- */
+.leaflet-control-zoom {
+    box-shadow: none;
+    margin-left: auto;
+    margin-right: auto;
+    margin: 0.3em;
+}
+
+.leaflet-bar a, .leaflet-bar a:hover {
+    width: 50px;
+    height: 30px;
+    color: rgb(52, 58, 64);
+    box-shadow: -2.5px 0 #c1c3b1, 0 2.5px #c1c3b1, 2.5px 0 #c1c3b1, 0 -2.5px #c1c3b1;
+}
+
+.leaflet-control-zoom-in  {
+    font-size: 150%;
+    margin: auto;
+    justify-content: center;
+}
+.leaflet-control-zoom-out {
+    font-size: 150%;
+    margin: auto;
+}
+
+/*-------------------MAP----------------------------*/
+.map {
+    height: 95vh;
+}
+
+.basemap-previews {
+    width: 7em;
+    border-color: rgba(221, 221, 221, 0.8);
+    border-style: solid;
+    border-radius: 5px;
+    margin: 0.3em;
+
+}
+
+.basemap-names {
+    font-size: 0.65rem;
+    font-weight: bold;
+}
+
+.leaflet-touch .leaflet-control-layers {
+    margin: 1.3em;
+}
+
+.leaflet-touch .leaflet-control-layers-toggle {
+    width: 9em;
+    height: 9em;
+}
+
+.leaflet-retina .leaflet-control-layers-toggle {
+    background-image: url('assets/osm.png');
+    background-size: 95% 95%;
+    border-radius: 12px;
+}
+
+.leaflet-bottom.leaflet-right {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+}
+
+.leaflet-control-attribution.leaflet-control{
+    order: 1;
+}
+
+.leaflet-control-layers-selector {
+    display: none;
+}
+
+.leaflet-control-layers-expanded {
+    background-color: rgba(255,255,255,0.9);
+    text-align: center;
+    padding: 0em;
+}
+
+.leaflet-control-layers-base {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+@media screen and (max-width: 50em) {
+    .leaflet-control-layers-base {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/*---------------basemap legends--------------*/
+.basemap-legend {
+    min-width: 15em;
+    z-index: 10000;
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    box-shadow: -1.5px 0 #c1c3b1, 0 1.5px #c1c3b1, 1.5px 0 #c1c3b1, 0 -1.5px #c1c3b1; /*matches colour of leaflet's shadow stylings */
+    text-align: center;
+    padding-bottom: 0.5em;
+    order: 2;
+}
+
+.basemap-legend > h2 {
+    font-size: 0.8rem;
+}
+
+
+.basemap-legend > .legendEntry{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(255, 255, 255);
+    width: 95%;
+    margin: auto;
+    text-align: left;
+}
+
+.basemap-legend > .legendEntry > .legendEntryColour {
+    width: 1.2em;
+    max-height: 1.1em;
+    margin: 0.1em;
+    margin-left: 0.3em;
+    border-radius: 2px;
+    border: 0.1em solid black;
+}
+
+.basemap-legend > .legendEntry > .legendEntryLabel {
+    margin-left: 1em;
+    font-weight: normal;
+    font-size: 0.7rem;
+}
