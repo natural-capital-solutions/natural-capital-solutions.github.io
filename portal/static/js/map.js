@@ -7,7 +7,7 @@ const map = L.map('map', {
 });
 
 map.createPane('datasetPane')
-map.getPane('datasetPane').style.zIndex = 1000;
+map.getPane('datasetPane').style.zIndex = 450;
 
 //set the zoom control to a variable to append to the tools-side div
 const zoom = L.control.zoom({
@@ -71,7 +71,7 @@ L.control.scale().addTo(map);
 
 //create a blank layerGroups for wms layers to be added to. must be declared outside of a function to allow global scope
 let esLayerGroup = L.layerGroup().addTo(map);
-let oppLayerGroup = L.layerGroup().addTo(map);
+let oppLayerGroup = L.layerGroup({pane: 'datasetPane'}).addTo(map);
 
 //print button
 const printDiv = L.control.browserPrint({title: 'Print',
